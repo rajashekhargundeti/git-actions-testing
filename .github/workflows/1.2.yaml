@@ -20,8 +20,14 @@ jobs:
       - name: step 1.2
         run: echo "Job 1.2" && echo "${{ needs.tests.outputs.my-output }}"
       - name: step 1.2.1
+        id: split2
         run: |
-          echo "REPO=`echo ${{ env.IMAGE_PATH }} | sed -e "s/:.*$//"` >> $GITHUB_ENV
-          echo "TAG=`echo ${{ env.IMAGE_PATH }} | sed -e "s/.*://"` >> $GITHUB_ENV
-          echo ${{ env.REPO }}
-          echo ${{ env.TAG }}
+          echo "REPO=`echo ${{ env.IMAGE_PATH }} | sed -e "s/:.*$//"` >> $GITHUB_OUTPUT
+          echo "TAG=`echo ${{ env.IMAGE_PATH }} | sed -e "s/.*://"` >> $GITHUB_OUTPUT
+          # echo ${{ env.REPO }}
+          # echo ${{ env.TAG }}
+      - name: step 1.2.2
+        run: |
+          echo ${{ steps.split2.outputs.REPO }}
+          echo ${{ steps.split2.outputs.TAG }}
+    
