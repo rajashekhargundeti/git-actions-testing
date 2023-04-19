@@ -21,6 +21,6 @@ jobs:
         run: echo "Job 1.2" && echo "${{ needs.tests.outputs.my-output }}"
       - name: step 1.2.1
         run: |
-          IFS=':' read -r -a IMAGE_ELEMENTS <<< ${{ env.IMAGE_PATH }}
-          echo ${{ IMAGE_ELEMENTS[0] }}
-          echo ${IMAGE_ELEMENTS[0]}
+          echo ${{ env.IMAGE_PATH }}
+          echo "::set-env name=IMAGE_ELEMENTS::${{ env.IMAGE_PATH }}"
+          echo ${IMAGE_ELEMENTS}
