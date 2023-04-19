@@ -3,10 +3,10 @@ name: j1.2
 on: 
   # pull_request: {}
   push: {}
-  workflow_run:
-    workflows: ["j1"]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["j1"]
+  #   types:
+  #     - completed
 jobs:
   tests:
     uses: ./.github/workflows/1.yaml
@@ -17,5 +17,3 @@ jobs:
     steps:
       - name: step 1.2
         run: echo "Job 1.2"
-
-
