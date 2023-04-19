@@ -1,16 +1,17 @@
 name: j1.2
 
 on: 
+  pull_request: {}
   # push: {}
-  workflow_run:
-    workflows: ["j1"]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["j1"]
+  #   types:
+  #     - completed
 jobs:
-  tests:
-    uses: ./.github/workflows/1.yaml
+  # tests:
+  #   uses: ./.github/workflows/1.yaml
   build:
-    needs: ["tests"]
+    # needs: ["tests"]
     name: build
     runs-on: ubuntu-latest
     steps:

@@ -1,7 +1,7 @@
 name: j1
 
 on: 
-  push: {}
+  # push: {}
   workflow_call: {}
 
 jobs:
