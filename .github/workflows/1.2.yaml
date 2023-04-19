@@ -23,5 +23,5 @@ jobs:
         run: |
           echo "REPO=`echo ${{ env.IMAGE_PATH }} | sed -e "s/:.*$//"` >> $GITHUB_ENV
           echo "TAG=`echo ${{ env.IMAGE_PATH }} | sed -e "s/.*://"` >> $GITHUB_ENV
-          echo ${REPO}
-          echo ${TAG}
+          echo ${{ env.REPO }}
+          echo ${{ env.TAG }}
