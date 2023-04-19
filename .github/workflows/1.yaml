@@ -6,7 +6,7 @@ on:
     outputs:
       my-output:
         description: "The first job output"
-        value: ${{ jobs.build.steps.test.outputs.job_output1 }}
+        value: ${{ jobs.build.steps.test.outputs.VALUE_1 }}
 
 jobs:
   build:
