@@ -1,0 +1,17 @@
+name: j1.1
+
+on: 
+  push: {}
+  workflow_run:
+    workflows: ["j1"]
+    types:
+      - completed
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: step 1.1
+        run: echo "Job 1.1"
+
+
