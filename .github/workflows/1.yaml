@@ -2,7 +2,11 @@ name: j1
 
 on: 
   # push: {}
-  workflow_call: {}
+  workflow_call: 
+    outputs:
+      my-output:
+        description: "The first job output"
+        value: ${{ jobs.build.steps.test.outputs.job_output1 }}
 
 jobs:
   build:
@@ -10,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: step 1
-        run: echo "Job 1"
+        id: test
+        run: echo "VALUE_1=Job 1" >> $GITHUB_OUTPUT
 
 
