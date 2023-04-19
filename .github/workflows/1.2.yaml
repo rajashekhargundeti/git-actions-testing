@@ -21,6 +21,7 @@ jobs:
         run: echo "Job 1.2" && echo "${{ needs.tests.outputs.my-output }}"
       - name: step 1.2.1
         run: |
-          echo ${{ env.IMAGE_PATH }}
-          echo "::set-env name=IMAGE_ELEMENTS::${{ env.IMAGE_PATH }}"
-          echo ${IMAGE_ELEMENTS}
+          echo "REPO=`echo ${{ env.IMAGE_PATH }} | sed -e "s/:.*$//"` >> $GITHUB_ENV
+          echo "TAG=`echo ${{ env.IMAGE_PATH }} | sed -e "s/.*://"` >> $GITHUB_ENV
+          echo ${REPO}
+          echo ${TAG}
