@@ -15,7 +15,7 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     env: 
-      IMAGE_PATH=${{ needs.tests.outputs.my-output }}
+      IMAGE_PATH: ${{ needs.tests.outputs.my-output }}
     steps:
       - name: step 1.2
         run: echo "Job 1.2" && echo "${{ needs.tests.outputs.my-output }}"
