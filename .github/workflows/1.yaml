@@ -6,12 +6,14 @@ on:
     outputs:
       my-output:
         description: "The first job output"
-        value: ${{ jobs.build.steps.test.outputs.VALUE_1 }}
+        value: ${{ jobs.build.outputs.VALUE_1 }}
 
 jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    outputs:
+      VALUE_1: ${{ steps.test.outputs.VALUE_1 }}
     steps:
       - name: step 1
         id: test
