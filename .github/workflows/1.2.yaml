@@ -2,7 +2,7 @@ name: j1.2
 
 on: 
   # pull_request: {}
-  # push: {}
+  push: {}
   workflow_run:
     workflows: ["j1"]
     types:
