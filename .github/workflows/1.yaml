@@ -17,6 +17,6 @@ jobs:
     steps:
       - name: step 1
         id: test
-        run: echo "VALUE_1=Job 1" >> $GITHUB_OUTPUT
+        run: echo "VALUE_1=ghcr.io/oracle-samples/oci-secrets-store-csi-driver-provider:f3c216f5a54b42787cd6e98d40da559c9740b722" >> $GITHUB_OUTPUT
 
 
