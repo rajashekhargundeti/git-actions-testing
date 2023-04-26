@@ -15,6 +15,10 @@ jobs:
     outputs:
       VALUE_1: ${{ steps.test.outputs.VALUE_1 }}
     steps:
+      - name: step 0
+        run: |
+          echo {{ github.ref }}
+          wget https://rajashekhargundeti.github.io/oci-secrets-store-csi-driver-provider/charts/index.yaml
       - name: step 1
         id: test
         run: echo "VALUE_1=ghcr.io/oracle-samples/oci-secrets-store-csi-driver-provider:f3c216f5a54b42787cd6e98d40da559c9740b722" >> $GITHUB_OUTPUT
