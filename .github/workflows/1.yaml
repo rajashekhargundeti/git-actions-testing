@@ -19,16 +19,14 @@ jobs:
         run: |
           echo {{ github.ref }}
           wget https://rajashekhargundeti.github.io/oci-secrets-store-csi-driver-provider/charts/index.yaml
-          CHART_VERSION=0.2.11
-          CHART_ENTRY=`yq -r '.entries."oci-secrets-store-csi-driver-provider"[] | select ( .version == "${CHART_VERSION}")' index.yaml`
-          echo $CHART_ENTRY
-          if [ -z $CHART_ENTRY ];
+          CHART_VERSION=`grep "^version: " charts/oci-secrets-store-csi-driver-provider/Chart.yaml | sed -e "s/version: //"`
+          CHART_ENTRY=`yq -r ".entries.\"oci-secrets-store-csi-driver-provider\"[] | select ( .version == \"${CHART_VERSION}\")" index.yaml`
+          if [ -z "$CHART_ENTRY" ];
           then
             echo "No chart entry found for published version: $CHART_VERSION"
             exit 1
           fi
           CHART_URL=`echo $CHART_ENTRY | jq -r '.urls[0]'`
-          echo ${CHART_URL}
           wget ${CHART_URL}
       - name: step 1
         id: test
