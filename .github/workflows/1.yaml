@@ -19,6 +19,16 @@ jobs:
         run: |
           echo {{ github.ref }}
           wget https://rajashekhargundeti.github.io/oci-secrets-store-csi-driver-provider/charts/index.yaml
+          CHART_VERSION=0.2.11
+          CHART_ENTRY=`yq -r '.entries."oci-secrets-store-csi-driver-provider"[] | select ( .version == "${CHART_VERSION}")' index.yaml`
+          if [ -z $CHART_ENTRY ];
+          then
+            echo "No chart entry found for published version: $CHART_VERSION"
+            exit 1
+          fi
+          CHART_URL=`echo $CHART_ENTRY | jq -r '.urls[0]'`
+          echo ${CHART_URL}
+          wget ${CHART_URL}
       - name: step 1
         id: test
         run: echo "VALUE_1=ghcr.io/oracle-samples/oci-secrets-store-csi-driver-provider:f3c216f5a54b42787cd6e98d40da559c9740b722" >> $GITHUB_OUTPUT
