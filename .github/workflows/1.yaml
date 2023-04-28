@@ -34,12 +34,19 @@ jobs:
       - name: get nodes
         run: kubectl get nodes
 
-      - name: step 1
-        id: test
-        run: echo "VALUE_1=ghcr.io/oracle-samples/oci-secrets-store-csi-driver-provider:f3c216f5a54b42787cd6e98d40da559c9740b722" >> $GITHUB_OUTPUT
-      - name: helm
+      - name: deploy helm chart
         run: |
-          which helm
-          helm version
-      - name: Log into GitHub Container Registry
-        run:  echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${GITHUB_ACTOR,,} --password-stdin
+          helm repo add oci-provider https://rajashekhargundeti.github.io/oci-secrets-store-csi-driver-provider/charts
+          helm install oci-provider oci-provider/oci-secrets-store-csi-driver-provider -n kube-system
+          kubectl get daemonset -n kube-system \
+          --selector='app.kubernetes.io/name in (oci-secrets-store-csi-driver-provider, secrets-store-csi-driver)'
+
+      # - name: step 1
+      #   id: test
+      #   run: echo "VALUE_1=ghcr.io/oracle-samples/oci-secrets-store-csi-driver-provider:f3c216f5a54b42787cd6e98d40da559c9740b722" >> $GITHUB_OUTPUT
+      # - name: helm
+      #   run: |
+      #     which helm
+      #     helm version
+      # - name: Log into GitHub Container Registry
+      #   run:  echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${GITHUB_ACTOR,,} --password-stdin
