@@ -12,8 +12,8 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
-    environment:
-      name: production
+#     environment:
+#       name: production
     outputs:
       VALUE_1: ${{ steps.test.outputs.VALUE_1 }}
     steps:
