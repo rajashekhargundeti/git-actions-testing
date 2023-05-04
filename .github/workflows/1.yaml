@@ -12,8 +12,8 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
-    environment:
-      name: production
+#     environment:
+#       name: production
     outputs:
       VALUE_1: ${{ steps.test.outputs.VALUE_1 }}
     steps:
@@ -48,6 +48,8 @@ jobs:
           then
             echo "published version and local versions are not matching"
             exit 1
+          else
+            echo "versions are matching"
           fi
 
       - name: deploy helm chart
