@@ -48,6 +48,8 @@ jobs:
           then
             echo "published version and local versions are not matching"
             exit 1
+          else
+            echo "versions are matching"
           fi
 
       - name: deploy helm chart
